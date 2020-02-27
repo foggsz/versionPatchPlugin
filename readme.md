@@ -1,6 +1,6 @@
 
 ## Version Patch WebpackPlugin
-****
+***
 一个提供自动生成版本号信息的webpack插件
 
 ### <center>Install</center>
@@ -33,8 +33,9 @@ yarn add --dev html-webpack-plugin
 | ignoreMode | 忽略环境变量mode, 所有环境下都会生成版本信息, 测试用 | boolean | false| 
 
 ### <center>Usage</center>
-****
+***
 #### webpack.config.js
+
 ```
 const VersionPatchPlugin = require('version-patch-webpackplugin')
 module.exports = {
