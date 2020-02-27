@@ -3,7 +3,7 @@ const pluginName = 'VersionPatchPlugin'
 const versionFileName = 'version.json'
 // 检查number格式
 function checkNumberVersion(str=null){
-    let regex=  /^[0-9]{1,3}.[0-9].[0-9]{1,2}$/
+    let regex=  /^[0-9]{1,3}\.[0-9]\.[0-9]{1,2}$/
     if(str){
         return regex.test(str)
     }
