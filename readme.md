@@ -11,7 +11,8 @@ npm i --save-dev version-patch-webpackplugin
 `
 yarn add --dev html-webpack-plugin
 ` 
-插件默认会在webpack mode:production时,检查output下的version.json文件吗， 如果不存在，则生成。存在则追加一个版本信息对象。
+
+插件默认会在webpack mode:production时,检查output目录下的version.json文件。不存在，则初始化生成。存在则追加一个版本信息对象。
 
 ### 版本信息对象
 | 属性          |      说明           | 类型 | 默认值   |
