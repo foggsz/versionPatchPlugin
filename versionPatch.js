@@ -10,7 +10,7 @@ const fsAccessAsync =  promisify(fs.access)
 const { checkNumberVersion , getNewNumber, versionFileName} = require('./help')
 
 class VersionPatch {
-    useKey = 'time' // 取版本号的key  time/number
+    useKey = 'number' // 取版本号的key  time/number
     timeFormat = 'YYYY-MM-DDD hh:mm:ss'   // moment时间格式
     fileName = versionFileName  // 文件名
     fileNamePrefix = ''       // 文件前缀

@@ -5,7 +5,7 @@ const VersionPatch = require('./versionPatch')
 const { pluginName }= require('./help')
 
 class VersionPatchPlugin {
-  options = { forceEnablePlugin: false }
+  options = { ignoreMode: false }
   constructor(options){
     this.options = Object.assign({}, this.options, options)
   }
@@ -18,8 +18,8 @@ class VersionPatchPlugin {
           try{
             let options = Object.assign({}, this.options)
             let versionPatch = new VersionPatch(options)
-            // 生产环境或强制激活时候生成版本文件
-            if( this.options.forceEnablePlugin || compiler.options.mode === 'production'){
+            // 生产环境或忽略mode 生成版本文件
+            if( this.options.ignoreMode || compiler.options.mode === 'production'){
               await versionPatch.generateVerFile(compilation)
             }
             if(typeof window!='undefined'){
