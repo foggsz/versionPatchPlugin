@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "webpack build autoGenerate version tool",
   "main": "index.js",
+  "git repository": "https://github.com/foggsz/versionPatchPlugin",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
