@@ -41,7 +41,8 @@ class VersionPatch {
         try{
             versionHistory = require(fullFilePath)
         }catch(err){
-            throw new Error(`under ${path.dirname(fullFilePath)},  ${fileName}not exists, please first generate json File.`)     
+            versionHistory = []
+            // throw new Error(`under ${path.dirname(fullFilePath)},  ${fileName}not exists, please first use build generate json File in production env.`)     
         }
         return versionHistory
     }
@@ -54,6 +55,9 @@ class VersionPatch {
     get version(){
         let key = this.useKey
         const versionHistory  = this.versionHistory
+        if(versionHistory.length === 0){
+            return null
+        }
         return versionHistory[versionHistory.length-1][key]
     }
     set version(value){

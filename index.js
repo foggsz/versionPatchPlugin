@@ -11,7 +11,6 @@ class VersionPatchPlugin {
   }
   
   apply(compiler){
-    if( this.options.forceEnablePlugin || compiler.options.mode === 'production'){
       compiler.hooks.emit.tapPromise(pluginName, (
         compilation
       ) => {
@@ -19,7 +18,10 @@ class VersionPatchPlugin {
           try{
             let options = Object.assign({}, this.options)
             let versionPatch = new VersionPatch(options)
-            await versionPatch.generateVerFile(compilation)
+            // 生产环境或强制激活时候生成版本文件
+            if( this.options.forceEnablePlugin || compiler.options.mode === 'production'){
+              await versionPatch.generateVerFile(compilation)
+            }
             if(typeof window!='undefined'){
               window._version = versionPatch.version
               window._versionHistory = versionPatch.versionHistory
@@ -30,7 +32,6 @@ class VersionPatchPlugin {
           }
         })
       })
-    }
   }
 }
 
