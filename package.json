@@ -6,7 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "git repository": "https://github.com/foggsz/versionPatchPlugin",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/foggsz/versionPatchPlugin.git"
+  },
   "keywords": [
     "webpack",
     "webpacl plugin",
