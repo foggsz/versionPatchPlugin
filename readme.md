@@ -33,7 +33,7 @@ yarn add --dev html-webpack-plugin
 
 ### <center>Usage</center>
 ****
-####webpack.config.js
+#### webpack.config.js
 ```
 const VersionPatchPlugin = require('version-patch-webpackplugin')
 module.exports = {
