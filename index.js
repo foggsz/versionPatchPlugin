@@ -21,8 +21,9 @@ class VersionPatchPlugin {
             // 生产环境或忽略mode 生成版本文件
             if( this.options.ignoreMode || compiler.options.mode === 'production'){
               await versionPatch.generateVerFile(compilation)
-              versionPatch.addVersionToBundle(compilation)
             }
+            // 为了开发时候获取
+            versionPatch.addVersionToBundle(compilation)
             resolve()
           }catch(err){
             return reject(err)
