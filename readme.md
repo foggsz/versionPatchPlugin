@@ -66,3 +66,9 @@ module.exports = {
     window._versionHistory = [] 
     window._version = null
 ```
+如果项目使用了clean-webpack-plugin, 请忽略version.json文件，配置如下
+```
+    new CleanWebpackPlugin({
+        cleanOnceBeforeBuildPatterns:['**/*,', '!version.json'],
+    })
+```
