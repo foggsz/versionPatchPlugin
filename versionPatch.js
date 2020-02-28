@@ -7,6 +7,7 @@ const moment = require('moment')
 const path = require('path')
 const { promisify }  =require('util')
 const fsAccessAsync =  promisify(fs.access)
+const  {ConcatSource }  = require('webpack-sources')
 const { checkNumberVersion , getNewNumber, versionFileName} = require('./help')
 
 class VersionPatch {
@@ -17,7 +18,7 @@ class VersionPatch {
     fullFilePath = '' // 完整路径文件
     reWrite= false    // 重写版本文件
     numberSeed = '0.0.00'     // time下，第一次生成的版本号
-    numberStep = '0.0.01' //每一步自动增加的版本号
+    numberStep = '0.0.90' //每一步自动增加的版本号
     
     constructor(options){
         let { useKey, fileName, fileNamePrefix, reWrite, timeFormat, numberSeed,  numberStep}  = options || {}
@@ -79,7 +80,7 @@ class VersionPatch {
         let fullFilePath = path.resolve(outPath, fileName)
         this.fullFilePath = fullFilePath
         
-
+        
         // 检查重写
         if(this.reWrite){
             let initVersionJson = this.initVersionJson()
@@ -155,6 +156,36 @@ class VersionPatch {
             time: newTime
         })
         return versionHistory
+    }
+
+    // 添加版本信息到文件
+    addVersionToBundle(compilation){
+        let entryKeys = Array.from(compilation.entrypoints.keys())
+        let assets =  compilation.getAssets()
+        /**
+         * 寻找入口文件
+         */
+        let assetsKeys = assets.map(asset=>{
+            return asset.name || ''
+        }).filter(name=>{
+            if(name.endsWith('.js')){
+                let  key = name.split('.')[0]
+                return ( entryKeys.indexOf(key) >= 0 )
+            }
+            return false
+      
+        })
+        if(!assetsKeys.length){
+            return 
+        }
+        let versionHistory = JSON.stringify(this.versionHistory)
+        let version = JSON.stringify(this.version)
+        for(let key of assetsKeys){
+           compilation.updateAsset(key, (old)=>{
+               return new ConcatSource(`function getVersion(){window._version= ${version} ; window._versionHistory=${versionHistory};}; getVersion();`, old)
+           })
+        }
+        
     }
 }
 

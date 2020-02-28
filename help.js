@@ -3,7 +3,7 @@ const pluginName = 'VersionPatchPlugin'
 const versionFileName = 'version.json'
 // 检查number格式
 function checkNumberVersion(str=null){
-    let regex=  /^[0-9]{1,3}\.[0-9]\.[0-9]{1,2}$/
+    let regex=  /^[0-9]{1,2}\.[0-9]\.[0-9]{1,2}$/
     if(str){
         return regex.test(str)
     }
@@ -17,7 +17,16 @@ function checkNumberVersion(str=null){
     }
     return true
 }
-
+// 获取新数字
+function getCarry(a,b){
+    let dict = {carry: 0, cur: a}
+    let carry = Math.floor(a/b)
+    if(carry > 0){
+        dict['carry'] =  carry
+        dict['cur'] = a%b
+    }
+    return dict
+}
 // 获取叠加后的number
 function getNewNumber(oldNumber,numberStep){
     let old = oldNumber.split('.')
@@ -26,6 +35,19 @@ function getNewNumber(oldNumber,numberStep){
     for(let i=0; i<old.length; i++){
         newNumber.push(Number(old[i])+Number(step[i]))
     }
+    /**
+     * 进位
+     */
+    if(newNumber.length!==3){
+        throw new Error('number length is error')
+    }
+    let carry = getCarry(newNumber[2], 99)
+    newNumber[2] = carry.cur
+    newNumber[1] = newNumber[1] + carry.carry
+    carry = getCarry(newNumber[1], 9)
+    newNumber[1] = carry.cur
+    newNumber[0] = newNumber[0] + carry.carry
+
     newNumber = newNumber.join('.')
     if(!checkNumberVersion(newNumber)){
         throw new Error('number plus numberStep is exceed')
@@ -33,6 +55,7 @@ function getNewNumber(oldNumber,numberStep){
     return newNumber
 
 }
+
 module.exports =  {
     pluginName,
     checkNumberVersion,

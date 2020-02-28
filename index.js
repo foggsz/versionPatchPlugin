@@ -21,17 +21,15 @@ class VersionPatchPlugin {
             // 生产环境或忽略mode 生成版本文件
             if( this.options.ignoreMode || compiler.options.mode === 'production'){
               await versionPatch.generateVerFile(compilation)
-            }
-            if(typeof window!='undefined'){
-              window._version = versionPatch.version
-              window._versionHistory = versionPatch.versionHistory
+              versionPatch.addVersionToBundle(compilation)
             }
             resolve()
           }catch(err){
-            reject(err)
+            return reject(err)
           }
         })
       })
+   
   }
 }
 
