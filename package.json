@@ -1,6 +1,6 @@
 {
   "name": "version-patch-webpackplugin",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "webpack build autoGenerate version tool",
   "main": "index.js",
   "scripts": {
