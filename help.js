@@ -41,10 +41,10 @@ function getNewNumber(oldNumber,numberStep){
     if(newNumber.length!==3){
         throw new Error('number length is error')
     }
-    let carry = getCarry(newNumber[2], 99)
+    let carry = getCarry(newNumber[2], 100)
     newNumber[2] = carry.cur
     newNumber[1] = newNumber[1] + carry.carry
-    carry = getCarry(newNumber[1], 9)
+    carry = getCarry(newNumber[1], 10)
     newNumber[1] = carry.cur
     newNumber[0] = newNumber[0] + carry.carry
 

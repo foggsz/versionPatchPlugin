@@ -12,13 +12,13 @@ const { checkNumberVersion , getNewNumber, versionFileName} = require('./help')
 
 class VersionPatch {
     useKey = 'number' // 取版本号的key  time/number
-    timeFormat = 'YYYY-MM-DDD hh:mm:ss'   // moment时间格式
+    timeFormat = 'YYYY-MM-DD hh:mm:ss'   // moment时间格式
     fileName = versionFileName  // 文件名
     fileNamePrefix = ''       // 文件前缀
     fullFilePath = '' // 完整路径文件
     reWrite= false    // 重写版本文件
     numberSeed = '0.0.00'     // time下，第一次生成的版本号
-    numberStep = '0.0.90' //每一步自动增加的版本号
+    numberStep = '0.0.01' //每一步自动增加的版本号
     
     constructor(options){
         let { useKey, fileName, fileNamePrefix, reWrite, timeFormat, numberSeed,  numberStep}  = options || {}
