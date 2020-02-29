@@ -27,7 +27,7 @@ yarn add --dev html-webpack-plugin
 | fileNamePrefix   |  文件名前缀  | string | ''  | - |
 | reWrite | 是否重写版本文件 | boolean | false | - |
 | useKey | 决定版本号取时间还是数字 | string  | number | [time,number] |
-| timeFormat | 可被解析的时间格式字符串 | string | YYYY-MM-DDD hh:mm:ss | - |
+| timeFormat | 可被解析的时间格式字符串 | string | YYYY-MM-DD hh:mm:ss | - |
 | numberSeed | 初始化版本号 | string | 0.0.00 | - |
 | numberStep | 每次递增的值 | string | 0.0.01 | - |
 | ignoreMode | 忽略环境变量mode, 所有环境下都会生成版本信息, 测试用 | boolean | false| 
